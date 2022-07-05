@@ -43,6 +43,10 @@ def search(request):
     return entry(request, None)
 
 def newPage(request):
+    if request.method == "POST":
+        print(request.POST["title"])
+        return request
+
     return render(request, "encyclopedia/newPage.html")
 
 def editPage(request):

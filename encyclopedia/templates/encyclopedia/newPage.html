@@ -7,10 +7,15 @@
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages</h1>
 
-    <ul>
-
-    </ul>
-
+    <form action="{% url 'newPage'%}" method="POST">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" name="q">
+        <br>
+        <textarea name="content" rows="4" cols="4" name="r">
+        </textarea>
+        <br>
+        <input type="submit" value="Save">
+    </form>
 {% endblock %}
