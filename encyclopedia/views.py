@@ -17,11 +17,17 @@ def index(request):
     })
 
 def entry(request, title):
-    print(util.get_entry(title))
-    return render(request, "encyclopedia/entry.html", {
+    entry = convert_to_html(title)
+    print("ENTRY VALUE: " + str(entry))
+    if entry != None:
+        return render(request, "encyclopedia/entry.html", {
         "title": title,
-        "entry": convert_to_html(title)
-    })
+        "entry": entry
+        })
+    else:
+        print(entry)
+        return render(request, "encyclopedia/error.html")
+
 
 def search(request):
     query = request.GET.get("q")
