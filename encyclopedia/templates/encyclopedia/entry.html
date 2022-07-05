@@ -1,9 +1,11 @@
 {% extends "encyclopedia/layout.html" %}
 {% block title %} {{title}} {% endblock %}
 
+{% block token %}{% csrf_token %}{% endblock%}
+
 {% block body %}
     {{entry|safe}}
-    
+
     <form action="">
         <input type="hidden">
         <button type="submit"></button>

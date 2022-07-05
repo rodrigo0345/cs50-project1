@@ -18,7 +18,7 @@ def index(request):
 
 def entry(request, title):
     entry = convert_to_html(title)
-    print("ENTRY VALUE: " + str(entry))
+
     if entry != None:
         return render(request, "encyclopedia/entry.html", {
         "title": title,
@@ -30,10 +30,17 @@ def entry(request, title):
 
 
 def search(request):
-    query = request.GET.get("q")
-    return render(request, "encyclopedia/search.html", {
-        "entries": util.search(query)
-    })
+    if request.method == "GET":
+        query = request.GET.get("q")
+
+        if query is not '':
+            for ent in util.list_entries():
+                if query.lower() in ent.lower():
+                    return entry(request, ent)
+                elif ent.find(query) != -1:
+                    return entry(request, ent)
+
+    return entry(request, None)
 
 def newPage(request):
     return render(request, "encyclopedia/newPage.html")
