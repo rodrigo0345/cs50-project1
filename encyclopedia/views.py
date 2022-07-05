@@ -47,11 +47,21 @@ def newPage(request):
         title = request.POST["title"]
         text = request.POST["text"]
         
+        if title.strip("") == "" or text.strip("") == "":
+            return render(request, "encyclopedia/newPage.html", {
+                        "alreadyExists": True,
+                        "errorMessage": "Text and title cannot be empty"
+                    })
+
         for ent in util.list_entries():
             if ent.lower() == title.lower():
                 return render(request, "encyclopedia/newPage.html", {
                     "alreadyExists": True,
+                    "errorMessage": "Title already exists"
                 })
+        
+        util.save_entry(title, text)
+        return entry(request, title)
 
     return render(request, "encyclopedia/newPage.html", {
         "alreadyExists": False,

@@ -12,7 +12,7 @@
         {% csrf_token %}
         <label for="title">
             {% if alreadyExists == True %}
-                <abbr title="The title you inserted already exists">
+                <abbr title="{{errorMessage}}">
             {% endif %}
             Title:
             {% if alreadyExists == True %}
