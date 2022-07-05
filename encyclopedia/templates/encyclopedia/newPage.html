@@ -10,10 +10,21 @@
 
     <form action="{% url 'newPage'%}" method="POST">
         {% csrf_token %}
-        <label for="title">Title:</label>
-        <input type="text" name="q">
+        <label for="title">
+            {% if alreadyExists == True %}
+                <abbr title="The title you inserted already exists">
+            {% endif %}
+            Title:
+            {% if alreadyExists == True %}
+                <span style="color: red;">*</span>
+            {% endif %}
+            {% if alreadyExists == True %}
+                </abbr>
+            {% endif %}
+        </label>
+        <input type="title" name="title">
         <br>
-        <textarea name="content" rows="4" cols="4" name="r">
+        <textarea name="text" rows="4" cols="4" name="r">
         </textarea>
         <br>
         <input type="submit" value="Save">

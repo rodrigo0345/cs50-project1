@@ -44,10 +44,18 @@ def search(request):
 
 def newPage(request):
     if request.method == "POST":
-        print(request.POST["title"])
-        return request
+        title = request.POST["title"]
+        text = request.POST["text"]
+        
+        for ent in util.list_entries():
+            if ent.lower() == title.lower():
+                return render(request, "encyclopedia/newPage.html", {
+                    "alreadyExists": True,
+                })
 
-    return render(request, "encyclopedia/newPage.html")
+    return render(request, "encyclopedia/newPage.html", {
+        "alreadyExists": False,
+    })
 
 def editPage(request):
     return render(request, "encyclopedia/editPage.html")
