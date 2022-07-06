@@ -6,8 +6,9 @@
 {% block body %}
     {{entry|safe}}
 
-    <form action="">
-        <input type="hidden">
-        <button type="submit"></button>
+    <form action="{% url 'editPage' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="title" id="" value ="{{title}}">
+        <input type="submit" value="edit">
     </form>
 {% endblock %}

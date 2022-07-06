@@ -22,11 +22,15 @@
                 </abbr>
             {% endif %}
         </label>
-        <input type="title" name="title">
+        <input type="title" name="title" {% if title %}value="{{title}}"{%endif%} required>
         <br>
-        <textarea name="text" rows="4" cols="4" name="r">
+        <textarea name="text" rows="10" cols="30" name="r" required>
+                {{text|safe}}
         </textarea>
         <br>
+        {% if edit %}
+            <input type="hidden" value="True" name="edit">
+        {% endif %}
         <input type="submit" value="Save">
     </form>
 {% endblock %}
