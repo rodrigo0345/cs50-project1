@@ -1,4 +1,4 @@
-import random
+from random import randrange
 from django.shortcuts import render
 from markdown2 import *
 
@@ -53,6 +53,7 @@ def newPage(request):
 
         title = request.POST["title"]
         text = request.POST["text"]
+        text = text.replace("\n", "")
         
         if title.strip("") == "" or text.strip("") == "":
             return render(request, "encyclopedia/newPage.html", {
@@ -98,6 +99,6 @@ def editPage(request):
 
 
 def randomPage(request):
-    randomNum = random.randrange(0, len(util.list_entries()))
+    randomNum = randrange(0, len(util.list_entries()))
 
     return entry(request, util.list_entries()[randomNum])

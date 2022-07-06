@@ -24,9 +24,7 @@
         </label>
         <input type="title" name="title" {% if title %}value="{{title}}"{%endif%} required>
         <br>
-        <textarea name="text" rows="10" cols="30" name="r" required>
-                {{text|safe}}
-        </textarea>
+        <textarea name="text" rows="8" name="r" required>{{text|safe}}</textarea>
         <br>
         {% if edit %}
             <input type="hidden" value="True" name="edit">
