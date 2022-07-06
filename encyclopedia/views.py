@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render
 from markdown2 import *
 
@@ -71,6 +72,6 @@ def editPage(request):
     return render(request, "encyclopedia/editPage.html")
 
 def randomPage(request):
-    return render(request, "encyclopedia/randomPage.html", {
-        "entry": util.get_random_entry()
-    })
+    randomNum = random.randrange(0, len(util.list_entries()))
+
+    return entry(request, util.list_entries()[randomNum])
