@@ -53,7 +53,9 @@ def newPage(request):
 
         title = request.POST["title"]
         text = request.POST["text"]
-        text = text.replace("\n", "")
+
+        # get rid of newlines
+        text = text[:-1]
         
         if title.strip("") == "" or text.strip("") == "":
             return render(request, "encyclopedia/newPage.html", {
